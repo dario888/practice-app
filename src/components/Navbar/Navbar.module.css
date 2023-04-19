@@ -1,0 +1,60 @@
+.navConainter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--clr-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4em 0;
+}
+
+/* .divLogo {
+  background-color: blue;
+} */
+
+.linkLogoImg {
+  display: inline-block;
+  height: 55px;
+  width: 55px;
+}
+
+.divLinksList {
+  display: flex;
+  justify-content: space-aorund;
+  align-items: center;
+}
+
+.logoutBtn {
+  background-color: transparent;
+  font-size: 1rem;
+  border: 2px solid var(--clr-yellow);
+  padding: 0.2em 0.6em;
+}
+
+.logoutBtn:hover {
+  background-color: var(--clr-primary-dark);
+  /* color: var(--clr-yellow); */
+  transition: 0.6s background-color ease-out;
+}
+
+.linkItem,
+.logoutBtn {
+  color: var(--clr-yellow);
+  margin-right: 2em;
+  font-weight: 700;
+}
+
+.linkItem:hover {
+  color: var(--clr-secondary);
+}
+
+.active {
+  /* color: var(--clr-yellow); */
+  color: var(--clr-secondary);
+  margin-right: 2em;
+  font-weight: 700;
+  padding-bottom: 0.163em;
+  border-bottom: 2px solid var(--clr-yellow);
+}
