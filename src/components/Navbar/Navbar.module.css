@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.4em 0;
+  z-index: 10;
 }
 
 /* .divLogo {
@@ -24,8 +25,9 @@
   display: flex;
   justify-content: space-aorund;
   align-items: center;
+  display: none;
 }
-
+/* ????? */
 .logoutBtn {
   background-color: transparent;
   font-size: 1rem;
@@ -35,7 +37,6 @@
 
 .logoutBtn:hover {
   background-color: var(--clr-primary-dark);
-  /* color: var(--clr-yellow); */
   transition: 0.6s background-color ease-out;
 }
 
@@ -44,17 +45,110 @@
   color: var(--clr-yellow);
   margin-right: 2em;
   font-weight: 700;
+  transition: 0.5s;
 }
 
 .linkItem:hover {
   color: var(--clr-secondary);
 }
-
+/* ???? */
 .active {
-  /* color: var(--clr-yellow); */
   color: var(--clr-secondary);
   margin-right: 2em;
   font-weight: 700;
   padding-bottom: 0.163em;
   border-bottom: 2px solid var(--clr-yellow);
+}
+
+.burgerMenu {
+  height: 2.3em;
+  width: 3.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+.burgerBar {
+  width: 3.5em;
+  height: 0.43em;
+  background-color: var(--clr-orange);
+  border-radius: 8px;
+}
+
+.barClicked:nth-child(1) {
+  transform: rotate(45deg) translate(0.3em, 0.9em);
+  transition: ease-out 0.5s;
+}
+
+.barClicked:nth-child(2) {
+  transform: scale(0);
+  transition: ease-out 0.5s;
+}
+
+.barClicked:nth-child(3) {
+  transform: rotate(135deg) translate(-0.5em, 1em);
+  transition: ease-out 0.5s;
+}
+
+.barUnClicked {
+  transform: rotate(0) translate(0);
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+}
+
+/* ------------- sliding menu ------------------ */
+.sideMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  padding-top: 6em;
+  width: 80%;
+  height: 100vh;
+  background-color: var(--clr-green2);
+  z-index: -10;
+  transition: 1s ease-out;
+}
+
+input {
+  display: none;
+}
+
+input:checked ~ .sideMenu {
+  transform: translateX(125%);
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: inherit;
+}
+
+.sideMenuLinkList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-left: 1em;
+  height: 200px;
+}
+
+@media (min-width: 800px) {
+  .burgerMenu,
+  .sideMenu {
+    display: none;
+  }
+
+  .divLinksList {
+    display: flex;
+    justify-content: space-aorund;
+    align-items: center;
+  }
 }

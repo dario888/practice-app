@@ -14,10 +14,12 @@ code {
   --clr-secondary: #db3dac;
   --clr-secondary-dark: #9c1f77;
   --clr-violet: #8615d1;
-  --clr-green2: #6ad115;
   --clr-orange: #e87c10;
+  --clr-orange-light: #f8b26b;
   --clr-yellow: #cfe810;
+  --clr-green2: #6ad115;
   --clr-green: #2de610;
+  --clr-cream: #faebd7;
 }
 
 * {

@@ -1,22 +1,20 @@
-import { Outlet, useRoutes } from "react-router-dom";
-// import { getFromLocalStorage, STORAGE_KES } from "../utils";
+import { Navigate, Outlet, useRoutes } from "react-router-dom";
 import LoginPage from "../pages/login/LoginPage";
 import RegisterPage from "../pages/register/RegisterPage";
 import HomePage from "../pages/home/HomePage";
 import AboutPage from "../pages/about/AboutPage";
 import DetailCharacterPage from "../pages/detailCharacterPage/DetailCharacterPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
+import { STORAGE_KEYS, getFromLocalStorage } from "../utils";
+
+const isAuthenticated = getFromLocalStorage(STORAGE_KEYS.AUTH);
 
 export const PublicRoutesLayout = () => {
-  //   const isAuthenticated = getFromLocalStorage(STORAGE_KES.AUTH);
-  //   return !isAuthenticated ? <Outlet /> : <Navigate to={"/home"} />;
-  return <Outlet />;
+  return !isAuthenticated ? <Outlet /> : <Navigate to={"/home"} />;
 };
 
 export const PrivateRoutesLayout = () => {
-  // const isAuthenticated = getFromLocalStorage(STORAGE_KES.AUTH);
-  // return !!isAuthenticated ? <Outlet /> : <Navigate to="/" />;
-  return <Outlet />;
+  return !!isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 };
 
 const appRoutes = [

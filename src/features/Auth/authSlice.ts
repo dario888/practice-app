@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, registerUser } from "./authAsyncThunks";
+import { getUser, loginUser, registerUser } from "./authAsyncThunks";
 import {
   isFulfilledAction,
   isPendingAction,
   isRejectedAction,
 } from "../../utils";
+import { IUser } from "./types";
 
 const initialState = {
+  user: {} as IUser,
   isUserLoading: true,
   errorAuth: "",
 };
@@ -17,7 +19,10 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getUser.fulfilled, (state, action) => {})
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {})
       .addCase(registerUser.fulfilled, (state, action) => {})
       .addMatcher(isPendingAction, (state) => {
         state.isUserLoading = true;

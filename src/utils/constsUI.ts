@@ -9,3 +9,30 @@ export const publicLinksData = [
   { url: "/", linkName: "Login" },
   { url: "/register", linkName: "Register" },
 ];
+
+export const inputDataArr = [
+  {
+    inputType: "text",
+    inputName: "username",
+    labelName: "USERNAME",
+    errorKey: "usernameErr",
+  },
+  {
+    inputType: "email",
+    inputName: "email",
+    labelName: "Email",
+    errorKey: "emailErr",
+  },
+  {
+    inputType: "password",
+    inputName: "password",
+    labelName: "Password",
+    errorKey: "passwordErr",
+  },
+  {
+    inputType: "password",
+    inputName: "checkPassword",
+    labelName: "Check Password",
+    errorKey: "checkPasswordErr",
+  },
+];
