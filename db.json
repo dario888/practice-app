@@ -7,7 +7,6 @@
       "passowrd": "qwerty123"
     }
   ],
-
   "episodes": [
     {
       "id": 1,
@@ -305,7 +304,6 @@
       "url": "https://rickandmortyapi.com/api/episode/40"
     }
   ],
-
   "characters": [
     {
       "id": 1,

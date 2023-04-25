@@ -1,17 +1,26 @@
-import React, { Fragment, useState } from "react";
+import { Fragment } from "react";
 import {
-  STORAGE_KEYS,
-  getFromLocalStorage,
   privateLinksData,
   publicLinksData,
+  removeFromStorage,
 } from "../../utils";
 import { NavLink } from "react-router-dom";
 import styles from "./NavigationLinks.module.css";
+import { useAppSelector } from "../../hooks";
+import { getStateFromAuthReducer } from "../../store";
+import { useAuth } from "../../hooks";
 
 const NavigationLinks = () => {
-  const [isAuthenticated] = useState(getFromLocalStorage(STORAGE_KEYS.AUTH));
+  const { isAuthenticated } = useAppSelector(getStateFromAuthReducer);
 
-  return !!isAuthenticated ? (
+  const { authFuncs } = useAuth({
+    localStorageCB: removeFromStorage,
+    url: "/",
+  });
+
+  const logoutUser = () => authFuncs();
+
+  return isAuthenticated ? (
     <Fragment>
       {" "}
       {privateLinksData.map((link) => (
@@ -25,7 +34,9 @@ const NavigationLinks = () => {
           {link.linkName}
         </NavLink>
       ))}
-      <button className={styles.logoutBtn}>Logout</button>
+      <button className={styles.logoutBtn} onClick={logoutUser}>
+        Logout
+      </button>
     </Fragment>
   ) : (
     <Fragment>

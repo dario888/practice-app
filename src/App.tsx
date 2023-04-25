@@ -5,8 +5,8 @@ import { AppRouter } from "./navigation";
 function App() {
   return (
     <div>
-      <Navbar />
       <AppRouter />
+      <Navbar />
     </div>
   );
 }

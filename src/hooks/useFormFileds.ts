@@ -1,12 +1,36 @@
-import { useState } from "react";
-import { TOnChangeInputEvent } from "../utils";
+import { useEffect, useState } from "react";
+import { TOnChangeInputEvent, TOnSubmitFormEvent } from "../utils";
 
-export const useFormFields = <T>(initialState: T) => {
-  const [formData, setFormData] = useState(initialState);
+interface IUseFormFiledParams<T1, K1> {
+  initialState: T1;
+  initialErrors: K1 | {};
+  onSubmitCB: () => void;
+  validate: (values: T1) => K1;
+}
+
+export const useFormFields = <T, K extends {}>({
+  initialState,
+  initialErrors,
+  onSubmitCB,
+  validate,
+}: IUseFormFiledParams<T, K>) => {
+  const [formValues, setFormValues] = useState(initialState);
+  const [errors, setErrors] = useState(initialErrors);
 
   const handleInputChange = (e: TOnChangeInputEvent) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
-  return { formData, handleInputChange };
+  const handleSubmit = (event: TOnSubmitFormEvent) => {
+    if (event) event.preventDefault();
+    setErrors(validate(formValues));
+  };
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) {
+      onSubmitCB();
+    }
+  }, [errors, onSubmitCB]);
+
+  return { formValues, handleInputChange, handleSubmit, errors };
 };

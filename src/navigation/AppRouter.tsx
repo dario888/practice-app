@@ -5,16 +5,17 @@ import HomePage from "../pages/home/HomePage";
 import AboutPage from "../pages/about/AboutPage";
 import DetailCharacterPage from "../pages/detailCharacterPage/DetailCharacterPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
-import { STORAGE_KEYS, getFromLocalStorage } from "../utils";
-
-const isAuthenticated = getFromLocalStorage(STORAGE_KEYS.AUTH);
+import { useAppSelector } from "../hooks";
+import { getStateFromAuthReducer } from "../store";
 
 export const PublicRoutesLayout = () => {
+  const { isAuthenticated } = useAppSelector(getStateFromAuthReducer);
   return !isAuthenticated ? <Outlet /> : <Navigate to={"/home"} />;
 };
 
 export const PrivateRoutesLayout = () => {
-  return !!isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+  const { isAuthenticated } = useAppSelector(getStateFromAuthReducer);
+  return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 };
 
 const appRoutes = [

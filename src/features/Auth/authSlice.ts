@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, loginUser, registerUser } from "./authAsyncThunks";
+import { getAllUsers, loginUser } from "./authAsyncThunks";
 import {
+  STORAGE_KEYS,
+  getFromLocalStorage,
   isFulfilledAction,
   isPendingAction,
   isRejectedAction,
@@ -8,7 +10,8 @@ import {
 import { IUser } from "./types";
 
 const initialState = {
-  user: {} as IUser,
+  user: {} as IUser | undefined,
+  isAuthenticated: !!(getFromLocalStorage(STORAGE_KEYS.AUTH) as string),
   isUserLoading: true,
   errorAuth: "",
 };
@@ -16,14 +19,18 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setIsAuthenticated: (state, { payload }) => {
+      state.isAuthenticated = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(getUser.fulfilled, (state, action) => {
+      .addCase(getAllUsers.fulfilled, (state, action) => {
         state.user = action.payload;
       })
       .addCase(loginUser.fulfilled, (state, action) => {})
-      .addCase(registerUser.fulfilled, (state, action) => {})
+      // .addCase(registerUser.fulfilled, (state, action) => {})
       .addMatcher(isPendingAction, (state) => {
         state.isUserLoading = true;
       })
@@ -38,6 +45,6 @@ const authSlice = createSlice({
   },
 });
 
-export const {} = authSlice.actions;
+export const { setIsAuthenticated } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

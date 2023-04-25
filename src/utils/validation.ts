@@ -3,7 +3,7 @@ import { ILoginError, ILoginInput } from "../pages/login/types";
 import { IRegisterError, IRegisterInput } from "../pages/register/types";
 
 export const loginValidation = (val: ILoginInput): ILoginError => {
-  const loginError = { passwordErr: "", emailErr: "" };
+  const loginError = {} as ILoginError;
 
   if (!validator.isEmail(val.email)) {
     loginError.emailErr = "Inavild Email!";
@@ -17,12 +17,11 @@ export const loginValidation = (val: ILoginInput): ILoginError => {
 };
 
 export const registerValidation = (val: IRegisterInput): IRegisterError => {
-  const registerError = {
-    usernameErr: "",
-    emailErr: "",
-    passwordErr: "",
-    checkPasswordErr: "",
-  };
+  const registerError = {} as IRegisterError;
+
+  if (val?.username?.length < 5) {
+    registerError.usernameErr = "Username min 5 characters!";
+  }
 
   if (!validator.isEmail(val.email)) {
     registerError.emailErr = "Inavild Email!";
@@ -38,7 +37,7 @@ export const registerValidation = (val: IRegisterInput): IRegisterError => {
   }
 
   if (val?.checkPassword !== val?.password) {
-    registerError.checkPasswordErr = "Different Passwrods!";
+    registerError.checkPasswordErr = "Passwords do not match!";
   }
 
   return registerError;
