@@ -1,0 +1,26 @@
+.loginContainer {
+  background-color: lightgrey;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6em;
+}
+
+.title {
+  margin-bottom: 2em;
+}
+
+.loginForm {
+  background-color: aliceblue;
+  width: 90%;
+  max-width: 500px;
+  padding: 1em 1em 1.5em;
+}
+
+.loginBtn {
+  background-color: blue;
+  color: whitesmoke;
+  width: 100%;
+  padding: 0.5em 0;
+}

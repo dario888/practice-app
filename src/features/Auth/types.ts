@@ -7,7 +7,7 @@ export interface IUser {
 }
 
 export interface ILoginUserParams {
-  id: number;
+  email: string;
   authFuncs: () => void;
 }
 export interface IRegisterUserParams {

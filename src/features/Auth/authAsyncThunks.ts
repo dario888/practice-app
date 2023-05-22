@@ -16,11 +16,11 @@ export const getAllUsers = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   "loginUser",
-  async ({ id, authFuncs }: ILoginUserParams, thunkAPI) => {
+  async ({ email, authFuncs }: ILoginUserParams, thunkAPI) => {
     try {
-      const res = await axiosData.get<IUser[]>("/users");
+      const users = await getAllUsersFromDB();
       authFuncs();
-      return res.data.find((user) => user?.id === id);
+      return users?.find((user) => user?.email === email);
     } catch (error) {
       return thunkAPI.rejectWithValue("something went wrong");
     }
@@ -38,3 +38,12 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+export const getAllUsersFromDB = async (): Promise<IUser[] | undefined> => {
+  try {
+    const res = await axiosData.get("/users");
+    return res.data;
+  } catch (error) {
+    console.log("getUserFromDB/ERROR:", error);
+  }
+};

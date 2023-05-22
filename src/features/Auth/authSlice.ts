@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllUsers, loginUser } from "./authAsyncThunks";
+import { loginUser, registerUser } from "./authAsyncThunks";
 import {
   STORAGE_KEYS,
   getFromLocalStorage,
@@ -26,11 +26,15 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllUsers.fulfilled, (state, action) => {
+      .addCase(loginUser.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.isAuthenticated = true;
+        state.isUserLoading = false;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {})
-      // .addCase(registerUser.fulfilled, (state, action) => {})
+      .addCase(registerUser.fulfilled, (state) => {
+        state.isAuthenticated = true;
+        state.isUserLoading = false;
+      })
       .addMatcher(isPendingAction, (state) => {
         state.isUserLoading = true;
       })

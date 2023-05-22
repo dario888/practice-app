@@ -36,3 +36,18 @@ export const inputDataArr = [
     errorKey: "checkPasswordErr",
   },
 ];
+
+export const inputLoginArr = [
+  {
+    inputType: "email",
+    inputName: "email",
+    labelName: "Email",
+    errorKey: "emailErr",
+  },
+  {
+    inputType: "password",
+    inputName: "password",
+    labelName: "Password",
+    errorKey: "passwordErr",
+  },
+];

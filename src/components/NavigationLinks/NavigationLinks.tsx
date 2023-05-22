@@ -6,19 +6,23 @@ import {
 } from "../../utils";
 import { NavLink } from "react-router-dom";
 import styles from "./NavigationLinks.module.css";
-import { useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import { getStateFromAuthReducer } from "../../store";
 import { useAuth } from "../../hooks";
+import { setIsAuthenticated } from "../../features";
 
 const NavigationLinks = () => {
   const { isAuthenticated } = useAppSelector(getStateFromAuthReducer);
-
+  const dispatch = useAppDispatch();
   const { authFuncs } = useAuth({
     localStorageCB: removeFromStorage,
     url: "/",
   });
 
-  const logoutUser = () => authFuncs();
+  const logoutUser = () => {
+    dispatch(setIsAuthenticated(false));
+    authFuncs();
+  };
 
   return isAuthenticated ? (
     <Fragment>

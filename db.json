@@ -5,6 +5,20 @@
       "username": "test",
       "email": "test@mail.com",
       "passowrd": "qwerty123"
+    },
+    {
+      "username": "user1",
+      "email": "user1@mail.com",
+      "password": "111111",
+      "checkPassword": "111111",
+      "id": 2
+    },
+    {
+      "username": "user2",
+      "email": "user2@mail.com",
+      "password": "111111",
+      "checkPassword": "111111",
+      "id": 3
     }
   ],
   "episodes": [
