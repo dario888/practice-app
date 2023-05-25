@@ -51,3 +51,15 @@ export const inputLoginArr = [
     errorKey: "passwordErr",
   },
 ];
+
+export const PAGE_NUMBER = 1;
+
+export const CHARACTERS_SPECIES = [
+  { id: 1, name: "ALIEN", value: "Alien" },
+  { id: 2, name: "HUMAN", value: "Human" },
+  { id: 3, name: "HUMANOID", value: "Humanoid" },
+  { id: 4, name: "POOPYBUTTHOLE", value: "Poopybutthole" },
+  { id: 5, name: "MALE", value: "Male" },
+  { id: 6, name: "FEMALE", value: "Female" },
+  { id: 7, name: "UKNOWN", value: "unknown" },
+];

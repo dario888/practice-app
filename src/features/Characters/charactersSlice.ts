@@ -1,12 +1,20 @@
-import { AnyAction, createSlice } from "@reduxjs/toolkit";
-import { getCharacter, getAllCharacters } from "./charactersAsyncThunks";
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  getCharacter,
+  getAllCharacters,
+  getPaginatedCharacters,
+} from "./charactersAsyncThunks";
 import {
   isFulfilledAction,
   isPendingAction,
   isRejectedAction,
 } from "../../utils";
+import { ICharacter } from "./types";
 
 const initialState = {
+  character: ({} as ICharacter) || undefined,
+  charactersList: ([] as ICharacter[]) || undefined,
+  charPage: 1,
   isCharLoading: true,
   errorChar: "",
 };
@@ -14,11 +22,32 @@ const initialState = {
 const charactersSlice = createSlice({
   name: "characters",
   initialState,
-  reducers: {},
+  reducers: {
+    setCharPage: (state) => {
+      state.charPage += 1;
+    },
+    setCharacter: (state, action) => {
+      state.character = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(getCharacter.fulfilled, (state, action) => {})
-      .addCase(getAllCharacters.fulfilled, (state, action) => {})
+      .addCase(getCharacter.fulfilled, (state, action) => {
+        state.character = action.payload;
+        state.isCharLoading = false;
+      })
+      .addCase(getPaginatedCharacters.fulfilled, (state, action) => {
+        state.charactersList = [
+          ...state.charactersList,
+          ...action.payload,
+        ].filter((x, i, arr) => i === arr.findIndex((c) => x.id === c.id));
+
+        state.isCharLoading = false;
+      })
+      .addCase(getAllCharacters.fulfilled, (state, action) => {
+        state.charactersList = action.payload;
+        state.isCharLoading = false;
+      })
       .addMatcher(isPendingAction, (state) => {
         state.isCharLoading = true;
       })
@@ -33,6 +62,6 @@ const charactersSlice = createSlice({
   },
 });
 
-export const {} = charactersSlice.actions;
+export const { setCharPage, setCharacter } = charactersSlice.actions;
 
 export const charactersReducer = charactersSlice.reducer;

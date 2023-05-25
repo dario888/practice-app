@@ -1,0 +1,11 @@
+.scrollBtn {
+  position: fixed;
+  bottom: 10%;
+  right: 2.5%;
+  height: 70px;
+  width: 70px;
+}
+
+.scrollBtnHidden {
+  display: none;
+}

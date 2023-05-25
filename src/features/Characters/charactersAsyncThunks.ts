@@ -1,11 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { axiosData } from "../../axois";
 
 export const getAllCharacters = createAsyncThunk(
   "getAllCharacters",
   async (_, thunkAPI) => {
     try {
-      const res = await axios("TODO");
+      const res = await axiosData("/characters");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue("something went wrong");
+    }
+  }
+);
+
+export const getPaginatedCharacters = createAsyncThunk(
+  "getPaginatedCharacters",
+  async (page: number, thunkAPI) => {
+    try {
+      const res = await axiosData(`/characters?_page=${page}`);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue("something went wrong");
@@ -15,9 +27,9 @@ export const getAllCharacters = createAsyncThunk(
 
 export const getCharacter = createAsyncThunk(
   "getCharacter",
-  async (_, thunkAPI) => {
+  async (id: number, thunkAPI) => {
     try {
-      const res = await axios("TODO");
+      const res = await axiosData(`/characters/${id}`);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue("something went wrong");

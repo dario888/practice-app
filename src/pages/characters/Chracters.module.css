@@ -1,0 +1,95 @@
+.mainContainer {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 7em;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: antiquewhite; */
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.header h2 {
+  margin-bottom: 0;
+}
+
+.galeryContainer {
+  /* background-color: bisque; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 38px;
+  width: 90%;
+  margin-right: 0;
+  height: auto;
+  margin-bottom: 2em;
+}
+
+.card {
+  background-color: tomato;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.cardImg {
+  height: 260px;
+  width: 90%;
+  margin-bottom: 1em;
+  padding-top: 0.5em;
+}
+
+.cardImg img {
+  border-radius: 10px 10px 0 0;
+}
+
+.sortBtnsDiv,
+.filterBtnsDiv {
+  display: flex;
+  align-items: center;
+  width: 200px;
+}
+
+.ascBtn,
+.descBtn {
+  width: 50%;
+  padding: 0.6em 0;
+  color: whitesmoke;
+}
+
+.ascBtn {
+  background-color: cornflowerblue;
+}
+
+.descBtn {
+  background-color: blueviolet;
+}
+
+.endOfCardsMsg,
+.errorMsg {
+  padding: 0.2em;
+  display: block;
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+  color: whitesmoke;
+  margin-bottom: 1em;
+}
+
+.endOfCardsMsg {
+  background-color: goldenrod;
+}
+
+.errorMsg {
+  background-color: crimson;
+}

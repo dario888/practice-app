@@ -2,7 +2,7 @@ import { Outlet, useRoutes } from "react-router-dom";
 // import { getFromLocalStorage, STORAGE_KES } from "../utils";
 import HomePage from "../pages/home/HomePage";
 import EpisodesPage from "../pages/episodes/EpisodesPage";
-import CharactersPage from "../pages/characters/Characters";
+import CharactersPage from "../pages/characters/CharactersPage";
 import AboutPage from "../pages/about/AboutPage";
 import DetailCharacterPage from "../pages/detailCharacterPage/DetailCharacterPage";
 

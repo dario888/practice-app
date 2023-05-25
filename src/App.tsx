@@ -1,12 +1,13 @@
 import React from "react";
-import { Navbar } from "./components";
+import { Navbar, ScrollToTopBtn } from "./components";
 import { AppRouter } from "./navigation";
 
 function App() {
   return (
     <div>
+      <ScrollToTopBtn />
       <AppRouter />
-      <Navbar />
+      <Navbar />/
     </div>
   );
 }

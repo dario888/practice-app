@@ -3,6 +3,7 @@ import LoginPage from "../pages/login/LoginPage";
 import RegisterPage from "../pages/register/RegisterPage";
 import HomePage from "../pages/home/HomePage";
 import AboutPage from "../pages/about/AboutPage";
+import CharactersPage from "../pages/characters/CharactersPage";
 import DetailCharacterPage from "../pages/detailCharacterPage/DetailCharacterPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
 import { useAppSelector } from "../hooks";
@@ -24,6 +25,7 @@ const appRoutes = [
     children: [
       { path: "home", element: <HomePage /> },
       { path: "about", element: <AboutPage /> },
+      { path: "characters", element: <CharactersPage /> },
       { path: "details-character", element: <DetailCharacterPage /> },
     ],
   },
