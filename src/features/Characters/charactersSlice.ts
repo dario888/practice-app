@@ -3,6 +3,7 @@ import {
   getCharacter,
   getAllCharacters,
   getPaginatedCharacters,
+  getSearchCharacters,
 } from "./charactersAsyncThunks";
 import {
   isFulfilledAction,
@@ -34,6 +35,10 @@ const charactersSlice = createSlice({
     builder
       .addCase(getCharacter.fulfilled, (state, action) => {
         state.character = action.payload;
+        state.isCharLoading = false;
+      })
+      .addCase(getSearchCharacters.fulfilled, (state, action) => {
+        state.charactersList = action.payload;
         state.isCharLoading = false;
       })
       .addCase(getPaginatedCharacters.fulfilled, (state, action) => {

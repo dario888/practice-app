@@ -5,7 +5,7 @@ interface IUseFormFiledParams<T1, K1> {
   initialState: T1;
   initialErrors: K1 | {};
   onSubmitCB: () => void;
-  validate: (values: T1) => K1;
+  validate?: (values: T1) => K1;
 }
 
 export const useFormFields = <T, K extends {}>({
@@ -23,14 +23,21 @@ export const useFormFields = <T, K extends {}>({
 
   const handleSubmit = (event: TOnSubmitFormEvent) => {
     if (event) event.preventDefault();
-    setErrors(validate(formValues));
+    if (typeof validate === "function") {
+      setErrors(validate(formValues));
+    } else {
+      setErrors({});
+    }
+    console.log("CUSTOM HOOK CHANGE");
   };
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
       onSubmitCB();
+      console.log("CUSTOM HOOK SUBMIT", formValues, errors);
     }
-  }, [errors, onSubmitCB]);
+    // eslint-disable-next-line
+  }, [errors]);
 
   return { formValues, handleInputChange, handleSubmit, errors };
 };

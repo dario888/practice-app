@@ -62,4 +62,5 @@ export const CHARACTERS_SPECIES = [
   { id: 5, name: "MALE", value: "Male" },
   { id: 6, name: "FEMALE", value: "Female" },
   { id: 7, name: "UKNOWN", value: "unknown" },
+  { id: 8, name: "ALL", value: "" },
 ];

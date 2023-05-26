@@ -12,7 +12,7 @@
   align-items: center;
   /* background-color: antiquewhite; */
   width: 100%;
-  margin-bottom: 1em;
+  margin-bottom: 3em;
 }
 
 .header h2 {
@@ -72,6 +72,24 @@
 
 .descBtn {
   background-color: blueviolet;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.6em;
+}
+.searchForm div,
+.searchForm label {
+  margin-bottom: 0;
+}
+
+.searchBtn {
+  width: 30%;
+  height: 30px;
+  background-color: darkcyan;
+  color: whitesmoke;
 }
 
 .endOfCardsMsg,

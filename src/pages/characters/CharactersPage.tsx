@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Chracters.module.css";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import { useAppDispatch, useAppSelector, useFormFields } from "../../hooks";
 import {
   ICharacter,
+  getAllCharacters,
   getPaginatedCharacters,
+  getSearchCharacters,
   setCharacter,
 } from "../../features";
 import { getStateFromCharReducer } from "../../store";
 import { PAGE_NUMBER, CHARACTERS_SPECIES } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import DropDownBtn from "../../components/common/DropDownBtn/DropDownBtn";
+import { Button, Input } from "../../components";
+
+export interface IQueryCharacter {
+  query: string;
+}
 
 const CharactersPage = () => {
   const [page, setPage] = useState(PAGE_NUMBER);
@@ -21,8 +28,24 @@ const CharactersPage = () => {
   const { charactersList, isCharLoading, errorChar } = useAppSelector(
     getStateFromCharReducer
   );
+
+  const {
+    formValues: { query },
+    handleInputChange,
+    handleSubmit,
+  } = useFormFields<IQueryCharacter, {}>({
+    onSubmitCB: handleOnSubmitForm,
+    initialState: {
+      query: "",
+    },
+    initialErrors: {},
+  });
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  function handleOnSubmitForm() {
+    if (query) dispatch(getSearchCharacters(query));
+  }
 
   const handlerScroll = () => {
     if (
@@ -41,6 +64,13 @@ const CharactersPage = () => {
       sortedCharsList.sort((a, b) => b.name.localeCompare(a.name));
     }
 
+    if (filterValue) {
+      const filterCharsList = sortedCharsList.filter(
+        (char) => char.species === filterValue || char.gender === filterValue
+      );
+      return setCharaModifyList(filterCharsList);
+    }
+
     setCharaModifyList(sortedCharsList);
   };
 
@@ -49,19 +79,25 @@ const CharactersPage = () => {
   };
 
   useEffect(() => {
+    if (!query) {
+      dispatch(getAllCharacters());
+    }
+  }, [query, dispatch]);
+
+  useEffect(() => {
     if (page < 5) {
       dispatch(getPaginatedCharacters(page));
     }
   }, [page, dispatch]);
 
   useEffect(() => {
-    if (isAscendingOrder !== undefined) {
+    if (isAscendingOrder !== undefined || filterValue) {
       handleSortAndFilterChars();
     } else {
       setCharaModifyList([...charactersList]);
     }
     // eslint-disable-next-line
-  }, [charactersList, isAscendingOrder]);
+  }, [charactersList, isAscendingOrder, filterValue]);
 
   useEffect(() => {
     window.addEventListener("scroll", handlerScroll);
@@ -89,7 +125,24 @@ const CharactersPage = () => {
             Z-A
           </button>
         </div>
-        <h2>Rick & Mory Characters</h2>
+        <div>
+          <h2>Rick & Morty Characters</h2>
+          <form className={styles.searchForm} onSubmit={handleSubmit}>
+            <Input
+              inputType={"text"}
+              inputName={"query"}
+              inputValue={query}
+              labelName={""}
+              errorMsg={""}
+              onChangeCB={handleInputChange}
+            />
+            <Button
+              styleBtn={styles.searchBtn}
+              textBtn="Search"
+              typeBtn="submit"
+            />
+          </form>
+        </div>
         <div className={styles.filterBtnsDiv}>
           <DropDownBtn
             content={CHARACTERS_SPECIES}
