@@ -16,7 +16,6 @@ export const getAllCharacters = createAsyncThunk(
 export const getSearchCharacters = createAsyncThunk(
   "getSearchCharacters",
   async (query: string, thunkAPI) => {
-    console.log("19 query", query);
     try {
       const res = await axiosData(`/characters?name_like=${query}`);
       return res.data;

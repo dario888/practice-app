@@ -34,7 +34,6 @@ export const useFormFields = <T, K extends {}>({
   useEffect(() => {
     if (Object.keys(errors).length === 0) {
       onSubmitCB();
-      console.log("CUSTOM HOOK SUBMIT", formValues, errors);
     }
     // eslint-disable-next-line
   }, [errors]);

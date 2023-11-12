@@ -157,7 +157,7 @@ const CharactersPage = () => {
             key={char.id}
             className={styles.card}
             onClick={() => {
-              setCharacter(char);
+              dispatch(setCharacter(char));
               navigate("/details-character");
             }}
           >

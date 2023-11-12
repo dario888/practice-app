@@ -64,3 +64,30 @@ export const CHARACTERS_SPECIES = [
   { id: 7, name: "UKNOWN", value: "unknown" },
   { id: 8, name: "ALL", value: "" },
 ];
+
+export const TOAST_MESSAGES = [
+  {
+    id: 1,
+    title: "Success",
+    backgroundColor: "#5cb85c",
+    icon: "https://img.icons8.com/ios/100/fff/pass.png",
+  },
+  {
+    id: 2,
+    title: "Error",
+    backgroundColor: "#d9534f",
+    icon: "https://img.icons8.com/ios/100/box-important--v1.png",
+  },
+  {
+    id: 3,
+    title: "Info",
+    backgroundColor: "#5bc0de",
+    icon: "https://img.icons8.com/ios/100/info--v1.png",
+  },
+  {
+    id: 4,
+    title: "Warning",
+    backgroundColor: "#f0ad4e",
+    icon: "https://img.icons8.com/ios/100/medium-risk.png",
+  },
+];
