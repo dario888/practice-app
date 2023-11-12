@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
 import {
   getCharacter,
   getAllCharacters,
@@ -11,6 +11,15 @@ import {
   isRejectedAction,
 } from "../../utils";
 import { ICharacter } from "./types";
+import { RootState } from "../../store";
+
+interface IInitialState {
+  character?: ICharacter;
+  charactersList?: ICharacter[];
+  charPage: number;
+  isCharLoading: boolean;
+  errorChar: string;
+}
 
 const initialState = {
   character: ({} as ICharacter) || undefined,
@@ -70,3 +79,17 @@ const charactersSlice = createSlice({
 export const { setCharPage, setCharacter } = charactersSlice.actions;
 
 export const charactersReducer = charactersSlice.reducer;
+
+// SELECTORS
+const selectCharactersList = (state: RootState) =>
+  state.charactersReducer.charactersList;
+export const charactersListSelector = createSelector(
+  [selectCharactersList],
+  (cl) => cl
+);
+
+export const isCharLoadingSelector = (state: RootState) =>
+  state.charactersReducer.isCharLoading;
+
+export const errorCharSelector = (state: RootState) =>
+  state.charactersReducer.errorChar;

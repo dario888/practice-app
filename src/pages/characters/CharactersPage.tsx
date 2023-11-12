@@ -3,12 +3,14 @@ import styles from "./Chracters.module.css";
 import { useAppDispatch, useAppSelector, useFormFields } from "../../hooks";
 import {
   ICharacter,
+  charactersListSelector,
+  errorCharSelector,
   getAllCharacters,
   getPaginatedCharacters,
   getSearchCharacters,
+  isCharLoadingSelector,
   setCharacter,
 } from "../../features";
-import { getStateFromCharReducer } from "../../store";
 import { PAGE_NUMBER, CHARACTERS_SPECIES } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import DropDownBtn from "../../components/common/DropDownBtn/DropDownBtn";
@@ -25,9 +27,10 @@ const CharactersPage = () => {
     boolean | undefined
   >();
   const [charaModifyList, setCharaModifyList] = useState<ICharacter[]>([]);
-  const { charactersList, isCharLoading, errorChar } = useAppSelector(
-    getStateFromCharReducer
-  );
+
+  const charactersList = useAppSelector(charactersListSelector);
+  const errorChar = useAppSelector(errorCharSelector);
+  const isCharLoading = useAppSelector(isCharLoadingSelector);
 
   const {
     formValues: { query },
@@ -56,7 +59,7 @@ const CharactersPage = () => {
   };
 
   const handleSortAndFilterChars = () => {
-    const sortedCharsList = [...charactersList];
+    const sortedCharsList = [...charactersList!];
 
     if (isAscendingOrder) {
       sortedCharsList.sort((a, b) => a.name.localeCompare(b.name));
@@ -94,7 +97,7 @@ const CharactersPage = () => {
     if (isAscendingOrder !== undefined || filterValue) {
       handleSortAndFilterChars();
     } else {
-      setCharaModifyList([...charactersList]);
+      setCharaModifyList([...charactersList!]);
     }
     // eslint-disable-next-line
   }, [charactersList, isAscendingOrder, filterValue]);
