@@ -13,7 +13,7 @@ import {
 import { ICharacter } from "./types";
 import { RootState } from "../../store";
 
-interface IInitialState {
+export interface IInitialState {
   character?: ICharacter;
   charactersList?: ICharacter[];
   charPage: number;
